@@ -1,8 +1,13 @@
 <?php
 require_once('functions.php');
 if(isset($_SESSION['email'])){
-	 die('Already Signed in please go to the <a href="dashboard.php">My Dashboard</a>.');
-	 
+	echo 'Already Signed in please go to the <a href="dashboard.php">My Dashboard</a>.';
+	echo '<br />';
+	echo 'If you wish to logout: <form method="POST" action="logout.php">';
+	echo '<input type="submit" value="Logout">';
+	echo '</form>';
+	session_destroy();
+	die();
 }
 $showForm=true;
 if(count($_POST)>0){
@@ -31,13 +36,16 @@ if(count($_POST)>0){
 }
 if($showForm){
 ?>
-<h1>Signin</h1>
+<h1>Login</h1>
 <form method="POST">
 	Email<br />
 	<input type="email" name="email" required /><br /><br />
 	Password<br />
 	<input type="password" name="password" required /><br /><br />
 	<button type="submit">Sign in</button>
+</form>
+<form method="POST" action="registration.php">
+	<button type="link">Register</button>
 </form>
 <?php
 } 
