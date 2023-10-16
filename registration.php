@@ -19,7 +19,7 @@ if(count($_POST)>0){
 		/// YOU CAN DO THIS!
 		// process information
 		$fp=fopen(__DIR__.'/userData/users.csv.php','a+');
-		fputs($fp,$_POST['email'].';'$_POST['email']';'.password_hash($_POST['password'],PASSWORD_DEFAULT).PHP_EOL);
+		fputs($fp, $_POST['email'] . ';' . $_POST['userName'] . ';' . password_hash($_POST['password'], PASSWORD_DEFAULT) . PHP_EOL);
 		fclose($fp);
 		echo 'Your account has been created, proceed to the <a href="login.php">Sign in page</a>.';
 		$showForm=false;
