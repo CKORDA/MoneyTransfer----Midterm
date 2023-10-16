@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<?=
+require_once('pageStyle.html');
+require_once('menu.html');
+?>
+<body>
+
+<div id="notifications"></div>
+<h1>Notifications Page</h1>
+<script>
+    function fetchNotifications() {
+        $.ajax({
+            url: 'notifications.php', // Change this to your PHP script
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Handle the retrieved notifications
+                updateNotifications(data);
+            },
+            error: function (error) {
+                console.error('Error fetching notifications:', error);
+            }
+        });
+    }
+
+
+    function updateNotifications(notifications) {
+        // Update the notifications div or perform other actions
+        var notificationsDiv = $('#notifications');
+        notificationsDiv.empty(); // Clear existing notifications
+
+        if (notifications.length === 0) {
+            notificationsDiv.append('<p>No new notifications</p>');
+        } else {
+            notifications.forEach(function (notification) {
+                notificationsDiv.append('<p>' + notification.message + ' - ' + notification.timestamp + '</p>');
+            });
+        }
+    }
+
+    // Fetch notifications on page load
+    fetchNotifications();
+
+    // Fetch notifications every X seconds (e.g., every 60 seconds)
+    setInterval(fetchNotifications, 60000);
+</script>
+
+</body>
+</html>
